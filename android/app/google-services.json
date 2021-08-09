@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "465063286786",
+    "project_id": "petadampot",
+    "storage_bucket": "petadampot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465063286786:android:95828155f5cbebc32eaf1b",
+        "android_client_info": {
+          "package_name": "com.petadampot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465063286786-p3ccrifdlfv84vctlqchceq17ieo5e3k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPycKYGyq-XyJJV8RYRbq2hPlu7_odoyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465063286786-p3ccrifdlfv84vctlqchceq17ieo5e3k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
