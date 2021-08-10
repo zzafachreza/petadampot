@@ -81,16 +81,6 @@ export default function Account({navigation}) {
             }}>
             {user.nama_lengkap}
           </Text>
-          <Divider style={{backgroundColor: colors.border, height: 1}} />
-          <Text
-            style={{
-              fontSize: 18,
-              fontFamily: fonts.secondary[400],
-              top: 10,
-              color: colors.black,
-            }}>
-            {user.tlp}
-          </Text>
         </View>
         <View
           style={{
@@ -109,13 +99,13 @@ export default function Account({navigation}) {
               style={{
                 fontFamily: fonts.secondary[600],
               }}>
-              E-mail
+              Nomor Induk
             </Text>
             <Text
               style={{
                 fontFamily: fonts.secondary[400],
               }}>
-              {user.email}
+              {user.nis}
             </Text>
           </View>
           <View
@@ -129,13 +119,33 @@ export default function Account({navigation}) {
               style={{
                 fontFamily: fonts.secondary[600],
               }}>
-              Alamat
+              Kelas
             </Text>
             <Text
               style={{
                 fontFamily: fonts.secondary[400],
               }}>
-              {user.alamat}
+              {user.kelas}
+            </Text>
+          </View>
+          <View
+            style={{
+              marginVertical: 5,
+              padding: 10,
+              borderRadius: 10,
+              backgroundColor: colors.white,
+            }}>
+            <Text
+              style={{
+                fontFamily: fonts.secondary[600],
+              }}>
+              Sekolah
+            </Text>
+            <Text
+              style={{
+                fontFamily: fonts.secondary[400],
+              }}>
+              {user.sekolah}
             </Text>
           </View>
           <Button

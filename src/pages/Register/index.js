@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import {colors} from '../../utils/colors';
 import {fonts} from '../../utils/fonts';
-import {MyInput, MyGap, MyButton} from '../../components';
+import {MyInput, MyGap, MyButton, MyHeader} from '../../components';
 import axios from 'axios';
 import {showMessage} from 'react-native-flash-message';
 import LottieView from 'lottie-react-native';
@@ -20,11 +20,9 @@ export default function Register({navigation}) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     nama_lengkap: null,
-    username: null,
-    email: null,
-    password: null,
-    telepon: null,
-    alamat: null,
+    nis: null,
+    kelas: null,
+    sekolah: null,
   });
 
   const [isEnabled, setIsEnabled] = useState(false);
@@ -64,18 +62,19 @@ export default function Register({navigation}) {
         flex: 1,
         padding: 10,
       }}>
+      <MyHeader />
       <ScrollView style={styles.page} showsVerticalScrollIndicator={false}>
         {/* <Image
         source={require('../../assets/logooren.png')}
         style={styles.image}
       /> */}
-        <Switch
+        {/* <Switch
           trackColor={{false: colors.border, true: colors.secondary}}
           thumbColor={isEnabled ? colors.primary : colors.border}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}
           value={isEnabled}
-        />
+        /> */}
         <Text
           style={{
             marginTop: 20,
@@ -108,13 +107,13 @@ export default function Register({navigation}) {
           styleInput={{
             color: isEnabled ? colors.white : colors.black,
           }}
-          label="username"
+          label="Nomor Induk"
           iconname="card-outline"
-          value={data.username}
+          value={data.nis}
           onChangeText={value =>
             setData({
               ...data,
-              username: value,
+              nis: value,
             })
           }
         />
@@ -123,28 +122,13 @@ export default function Register({navigation}) {
           styleInput={{
             color: isEnabled ? colors.white : colors.black,
           }}
-          label="Email"
-          iconname="mail-outline"
-          value={data.email}
+          label="kelas"
+          iconname="home-outline"
+          value={data.kelas}
           onChangeText={value =>
             setData({
               ...data,
-              email: value,
-            })
-          }
-        />
-        <MyGap jarak={5} />
-        <MyInput
-          styleInput={{
-            color: isEnabled ? colors.white : colors.black,
-          }}
-          label="Alamat"
-          iconname="map-outline"
-          value={data.alamat}
-          onChangeText={value =>
-            setData({
-              ...data,
-              alamat: value,
+              kelas: value,
             })
           }
         />
@@ -154,33 +138,17 @@ export default function Register({navigation}) {
           styleInput={{
             color: isEnabled ? colors.white : colors.black,
           }}
-          label="Telepon"
-          iconname="call-outline"
-          value={data.telepon}
+          label="sekolah"
+          iconname="school-outline"
+          value={data.sekolah}
           onChangeText={value =>
             setData({
               ...data,
-              telepon: value,
+              sekolah: value,
             })
           }
         />
 
-        <MyGap jarak={5} />
-        <MyInput
-          styleInput={{
-            color: isEnabled ? colors.white : colors.black,
-          }}
-          label="Password"
-          iconname="key-outline"
-          secureTextEntry
-          value={data.password}
-          onChangeText={value =>
-            setData({
-              ...data,
-              password: value,
-            })
-          }
-        />
         <MyGap jarak={20} />
         <MyButton
           warna={colors.primary}

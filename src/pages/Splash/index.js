@@ -16,6 +16,28 @@ import {color} from 'react-native-reanimated';
 import {getData} from '../../utils/localStorage';
 import LottieView from 'lottie-react-native';
 
+import Sound from 'react-native-sound';
+import {MyHeader} from '../../components';
+
+var whoosh = new Sound(
+  require('../../assets/suara.mp3'),
+  Sound.MAIN_BUNDLE,
+  error => {
+    if (error) {
+      console.log('failed to load the sound', error);
+      return;
+    }
+    // loaded successfully
+    alert('nyala suara');
+    console.log(
+      'duration in seconds: ' +
+        whoosh.getDuration() +
+        'number of channels: ' +
+        whoosh.getNumberOfChannels(),
+    );
+  },
+).play();
+
 export default function Splash({navigation}) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;

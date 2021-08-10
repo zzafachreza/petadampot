@@ -21,7 +21,7 @@ import MyNews from '../../components/MyNews';
 import MyKategori from '../../components/MyKategori';
 import axios from 'axios';
 import MyCarouser2 from '../../components/MyCarouser2';
-import {MyButton, MyGap, MyTerbaik} from '../../components';
+import {MyButton, MyGap, MyTerbaik, MyHeader} from '../../components';
 import Carousel from 'react-native-snap-carousel';
 
 export default function Home({navigation}) {
@@ -95,6 +95,7 @@ export default function Home({navigation}) {
       style={{
         flex: 1,
       }}>
+      <MyHeader />
       <ScrollView>
         <View
           style={{
@@ -133,6 +134,7 @@ export default function Home({navigation}) {
               </Text>
             </View>
           </View>
+
           <View
             style={{
               justifyContent: 'flex-end',
@@ -147,6 +149,7 @@ export default function Home({navigation}) {
             />
           </View>
         </View>
+
         <View>
           <MyCarouser />
         </View>

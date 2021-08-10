@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {colors} from '../../utils/colors';
 import {fonts} from '../../utils/fonts';
-import {MyInput, MyGap, MyButton} from '../../components';
+import {MyInput, MyGap, MyButton, MyHeader} from '../../components';
 import LottieView from 'lottie-react-native';
 import axios from 'axios';
 import {storeData, getData} from '../../utils/localStorage';
@@ -24,8 +24,7 @@ export default function Login({navigation}) {
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState('');
   const [data, setData] = useState({
-    username: null,
-    password: null,
+    nis: null,
   });
 
   const [isEnabled, setIsEnabled] = useState(false);
@@ -77,6 +76,7 @@ export default function Login({navigation}) {
         flex: 1,
         padding: 10,
       }}>
+      <MyHeader />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{
@@ -90,13 +90,13 @@ export default function Login({navigation}) {
             backgroundColor: colors.white,
             borderRadius: 10,
           }}>
-          <Switch
+          {/* <Switch
             trackColor={{false: colors.border, true: colors.secondary}}
             thumbColor={isEnabled ? colors.primary : colors.border}
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}
             value={isEnabled}
-          />
+          /> */}
           <Text
             style={{
               fontFamily: fonts.secondary[600],
@@ -139,38 +139,25 @@ export default function Login({navigation}) {
             styleInput={{
               color: isEnabled ? colors.white : colors.black,
             }}
-            label="username"
+            label="Nomor Induk"
             iconname="card-outline"
-            value={data.username}
+            value={data.nis}
             onChangeText={value =>
               setData({
                 ...data,
-                username: value,
+                nis: value,
               })
             }
           />
+
           <MyGap jarak={20} />
-          <MyInput
-            styleInput={{
-              color: isEnabled ? colors.white : colors.black,
-            }}
-            label="Password"
-            iconname="key-outline"
-            secureTextEntry
-            onChangeText={value =>
-              setData({
-                ...data,
-                password: value,
-              })
-            }
-          />
-          <MyGap jarak={40} />
           <MyButton
             warna={colors.primary}
             title="LOGIN"
             Icons="log-in"
             onPress={masuk}
           />
+          <MyGap jarak={20} />
         </View>
       </ScrollView>
       {loading && (

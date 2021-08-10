@@ -10,14 +10,34 @@ import {
   ImageBackground,
   StatusBar,
 } from 'react-native';
-import {MyButton, MyGap} from '../../components';
+import {MyButton, MyGap, MyHeader} from '../../components';
 import {colors} from '../../utils/colors';
 import {color} from 'react-native-reanimated';
 import {fonts} from '../../utils/fonts';
 import LottieView from 'lottie-react-native';
 import FastImage from 'react-native-fast-image';
+import Sound from 'react-native-sound';
 
 export default function GetStarted({navigation}) {
+  var whoosh = new Sound(
+    require('../../assets/suara.mp3'),
+    Sound.MAIN_BUNDLE,
+    error => {
+      if (error) {
+        console.log('failed to load the sound', error);
+        return;
+      }
+      // loaded successfully
+      alert('nyala suara');
+      console.log(
+        'duration in seconds: ' +
+          whoosh.getDuration() +
+          'number of channels: ' +
+          whoosh.getNumberOfChannels(),
+      );
+    },
+  );
+
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
@@ -43,8 +63,11 @@ export default function GetStarted({navigation}) {
     useNativeDriver: false,
   }).start();
 
+  whoosh.play();
+
   return (
     <ImageBackground style={styles.page} resizeMode="cover">
+      <MyHeader />
       {/* <StatusBar backgroundColor={colors.secondary} barStyle="light-content" /> */}
       <View
         style={{

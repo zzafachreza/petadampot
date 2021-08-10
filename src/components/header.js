@@ -3,10 +3,9 @@ import {StyleSheet, Text, View, ImageBackground, Image} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Sound from 'react-native-sound';
-import {colors} from '../../utils/colors';
 
 var whoosh = new Sound(
-  require('../../assets/suara.mp3'),
+  require('../assets/suara.mp3'),
   Sound.MAIN_BUNDLE,
   error => {
     if (error) {
@@ -23,32 +22,28 @@ var whoosh = new Sound(
   },
 );
 
-export default function MyHeader({keterangan, tipe}) {
+export default function header({keterangan, tipe}) {
   const [speaker, setSepeaker] = useState(false);
   const saklar = x => {
     setSepeaker(x);
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      whoosh.play(res => {
-        console.log('suara', res);
-      });
-    }, 100);
+    // alert('test');
+    whoosh.play();
   }, []);
 
   return (
     <View
       style={{
         // flex: 1,
-        // backgroundColor: 'red',
+        //   backgroundColor: 'red',
         flexDirection: 'row',
       }}>
       <View
         style={{
           flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
+          alignItems: 'flex-start',
           // backgroundColor: 'blue',
         }}>
         {!speaker ? (
@@ -57,18 +52,21 @@ export default function MyHeader({keterangan, tipe}) {
               saklar(true);
               // alert('mute');
               // Pause the sound
-              whoosh.stop();
+              whoosh.pause();
             }}
             style={{
+              // marginRight: 100,
+              padding: 10,
+              margin: 10,
               width: 100,
               justifyContent: 'center',
               alignItems: 'center',
               // backgroundColor: 'yellow',
             }}>
             <Icon
-              name="volume-high"
-              type="ionicon"
-              color={colors.black}
+              name="volume-up"
+              type="font-awesome"
+              color={tipe == 'Gallery' ? '#FFF' : 'black'}
               size={35}
             />
           </TouchableOpacity>
@@ -77,25 +75,59 @@ export default function MyHeader({keterangan, tipe}) {
             onPress={() => {
               saklar(false);
               whoosh.play();
-              // whoosh.stop();
             }}
             style={{
               // marginRight: 100,
-
+              padding: 10,
+              margin: 10,
               width: 100,
               justifyContent: 'center',
               alignItems: 'center',
               // backgroundColor: 'yellow',
             }}>
             <Icon
-              name="volume-mute"
-              type="ionicon"
-              color={colors.black}
+              name="volume-off"
+              type="font-awesome"
+              color={tipe == 'Gallery' ? '#FFF' : 'black'}
               size={35}
             />
           </TouchableOpacity>
         )}
       </View>
+      {tipe == 'Gallery' ? (
+        <View
+          style={{
+            flex: 3,
+            // backgroundColor: 'green',
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}>
+          <Text
+            style={{
+              color: '#FFF',
+              fontSize: 25,
+              fontFamily: 'Montserrat-SemiBold',
+            }}>
+            {keterangan}
+          </Text>
+        </View>
+      ) : (
+        <View
+          style={{
+            flex: 3,
+            // backgroundColor: 'green',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text
+            style={{
+              fontSize: 25,
+              fontFamily: 'Montserrat-SemiBold',
+            }}>
+            {keterangan}
+          </Text>
+        </View>
+      )}
     </View>
   );
 }

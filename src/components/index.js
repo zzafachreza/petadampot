@@ -6,6 +6,7 @@ import Preview from './Preview';
 import MyPicker from './MyPicker';
 import MyKategori from './MyKategori';
 import MyTerbaik from './MyTerbaik';
+import MyHeader from './MyHeader';
 
 export {
   BottomNavigator,
@@ -16,4 +17,5 @@ export {
   Preview,
   MyTerbaik,
   MyPicker,
+  MyHeader,
 };
