@@ -88,7 +88,7 @@ export default function Splash({navigation}) {
         console.log('sudah login logon');
 
         setTimeout(() => {
-          navigation.replace('MainApp');
+          // navigation.replace('MainApp');
         }, 1500);
       }
     });
@@ -113,17 +113,28 @@ export default function Splash({navigation}) {
           style={{
             top: scaleText,
           }}>
-          {/* <Text
+          <Text
             style={{
               marginTop: 10,
               fontFamily: fonts.primary[600],
-              fontSize: windowWidth / 22,
+              fontSize: windowWidth / 10,
               textAlign: 'center',
               maxWidth: windowWidth / 1.2,
+              color: colors.primary,
+            }}>
+            PETADAMPOT
+          </Text>
+          <Text
+            style={{
+              marginTop: 0,
+              fontFamily: fonts.primary[600],
+              fontSize: windowWidth / 21,
+              textAlign: 'center',
+              // maxWidth: windowWidth / 1.2,
               color: colors.tertiary,
             }}>
-            Perawatan Tanaman Dalam Pot
-          </Text> */}
+            perawatan tanaman dalam pot
+          </Text>
         </Animated.View>
       </View>
     </SafeAreaView>
