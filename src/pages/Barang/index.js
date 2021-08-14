@@ -22,38 +22,59 @@ import axios from 'axios';
 export default function Barang({navigation, route}) {
   const item = route.params;
 
-  const [jumlah, setJumlah] = useState('5000');
+  const [kirim, setKirim] = useState({
+    tanaman: item.tanaman,
+    siram: item.siram,
+    pupuk: item.pupuk,
+  });
+
+  let gambar = '';
+
+  switch (item.tanaman) {
+    case 'TANAMAN JAHE':
+      gambar = require('../../assets/jahe.png');
+      break;
+    case 'TANAMAN STRAWBERRY':
+      gambar = require('../../assets/strawberry.png');
+      break;
+    case 'TANAMAN PEPAYA':
+      gambar = require('../../assets/pepaya.png');
+      break;
+
+    default:
+      break;
+  }
+
+  navigation.setOptions({
+    title: item.tanaman,
+  });
+
+  const [jumlah, setJumlah] = useState(parseInt(item.siram));
+  const [jumlah2, setJumlah2] = useState(parseInt(item.pupuk));
   const [user, setUser] = useState({});
 
   useEffect(() => {
     getData('user').then(res => {
       console.log('data user', res);
       setUser(res);
+      setKirim({
+        ...kirim,
+        nis: res.nis,
+      });
     });
   }, []);
 
   const addToCart = () => {
-    const kirim = {
-      id_member: user.id,
-      id_barang: item.id,
-      nama_barang: item.nama_barang,
-      qty: jumlah,
-      harga: item.harga,
-      total: jumlah * item.harga,
-      foto: item.foto,
-    };
     console.log('kirim tok server', kirim);
     axios
-      .post('https://zavalabs.com/gobenk/api/barang_add.php', kirim)
+      .post('https://zavalabs.com/petadampot/api/tanaman_update.php', kirim)
       .then(res => {
         console.log(res);
-        // navigation.navigate('Success2', {
-        //   message: 'Berhasil Tambah Keranjang',
-        // });
         showMessage({
           type: 'success',
-          message: 'Berhasil Masuk Keranjang',
+          message: item.tanaman + 'Berhasil di Update',
         });
+        navigation.goBack();
       });
   };
 
@@ -61,99 +82,222 @@ export default function Barang({navigation, route}) {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: colors.primary,
+        backgroundColor: colors.white,
       }}>
-      <View style={{flex: 1}}>
+      <ScrollView style={{flex: 1}}>
         <Image
-          resizeMode="stretch"
+          resizeMode="cover"
           style={{
             // marginTop: (windowWidth / 5) * -1,
             width: '100%',
             aspectRatio: 1.5,
+            alignSelf: 'center',
             // margin: 5,
           }}
-          source={{
-            uri: item.foto,
-          }}
+          source={gambar}
         />
         <View
           style={{
-            marginTop: (windowWidth / 15) * -1,
             backgroundColor: colors.white,
             flex: 1,
             padding: 10,
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
           }}>
-          <Text
-            style={{
-              fontFamily: fonts.secondary[600],
-              fontSize: windowWidth / 22,
-              textAlign: 'center',
-              marginBottom: 10,
-            }}>
-            {item.keterangan}
-          </Text>
           <Text
             style={{
               fontFamily: fonts.secondary[600],
               fontSize: windowWidth / 15,
               color: colors.black,
             }}>
-            {item.nama_barang}
+            {item.tanaman}
           </Text>
-          {/* <Text
-            style={{
-              fontFamily: fonts.secondary[600],
-              fontSize: windowWidth / 20,
-              color: colors.primary,
-            }}>
-            Rp. {new Intl.NumberFormat().format(item.harga * jumlah)} / Liter
-          </Text> */}
         </View>
-      </View>
-      <View
-        style={{
-          backgroundColor: colors.white,
-          paddingHorizontal: 10,
-        }}>
-        <MyInput
-          onChangeText={val => setJumlah(val)}
-          label="Masukan Jumlah Pesanan"
-          value={jumlah}
-        />
-      </View>
-      <View
-        style={{
-          backgroundColor: colors.white,
-          padding: 20,
-        }}>
-        <Text
-          style={{
-            fontFamily: fonts.secondary[600],
-            fontSize: windowWidth / 12,
-            color: colors.primary,
-            textAlign: 'center',
-          }}>
-          Rp. {new Intl.NumberFormat().format(item.harga * jumlah)}
-        </Text>
-        <Text
-          style={{
-            fontFamily: fonts.secondary[400],
-            fontSize: windowWidth / 35,
-            color: colors.black,
-            textAlign: 'center',
-            marginTop: 10,
-          }}>
-          *) Harga sudah termasuk ongkos kirim dan PPN 10%
-        </Text>
-      </View>
+        <View style={{flex: 1, padding: 10}}>
+          {/* siram */}
+          <View>
+            <View style={{flexDirection: 'row'}}>
+              <Icon type="ionicon" name="color-fill" color={colors.primary} />
+              <Text
+                style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: windowWidth / 20,
+                  color: colors.primary,
+                  left: 10,
+                }}>
+                Siram Sehari Berapa Kali
+              </Text>
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                padding: 10,
+
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  if (jumlah <= 0) {
+                    showMessage({
+                      type: 'danger',
+                      message: 'Masukan Minimal 1x',
+                    });
+                  } else {
+                    setJumlah(jumlah - 1);
+                    setKirim({
+                      ...kirim,
+                      siram: jumlah - 1,
+                    });
+                  }
+                }}
+                style={{
+                  backgroundColor: colors.primary,
+                  width: '40%',
+                  borderRadius: 10,
+                  height: 40,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginRight: 10,
+                }}>
+                <Icon type="ionicon" name="remove" color={colors.white} />
+              </TouchableOpacity>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '20%',
+                }}>
+                <Text style={{fontSize: 16, fontFamily: fonts.secondary[600]}}>
+                  {jumlah} X
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  if (jumlah > 100) {
+                    showMessage({
+                      type: 'danger',
+                      message: 'Masukan Maksimal 100x',
+                    });
+                  } else {
+                    setJumlah(jumlah + 1);
+                    setKirim({
+                      ...kirim,
+                      siram: jumlah + 1,
+                    });
+                  }
+                }}
+                style={{
+                  backgroundColor: colors.primary,
+                  width: '40%',
+                  borderRadius: 10,
+                  marginLeft: 10,
+                  height: 40,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Icon type="ionicon" name="add" color={colors.white} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          {/* Siram */}
+          <MyGap jarak={10} />
+          {/* pupuk */}
+          <View>
+            <View style={{flexDirection: 'row'}}>
+              <Icon type="ionicon" name="server" color={colors.black} />
+              <Text
+                style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: windowWidth / 20,
+                  color: colors.black,
+                  left: 10,
+                }}>
+                Pupuk Sehari Berapa Kali
+              </Text>
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                padding: 10,
+
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  if (jumlah2 <= 0) {
+                    showMessage({
+                      type: 'danger',
+                      message: 'Masukan Minimal 1x',
+                    });
+                  } else {
+                    setJumlah2(jumlah2 - 1);
+                    setKirim({
+                      ...kirim,
+                      pupuk: jumlah2 - 1,
+                    });
+                  }
+                }}
+                style={{
+                  backgroundColor: colors.black,
+                  width: '40%',
+                  borderRadius: 10,
+                  height: 40,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginRight: 10,
+                }}>
+                <Icon type="ionicon" name="remove" color={colors.white} />
+              </TouchableOpacity>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '20%',
+                }}>
+                <Text style={{fontSize: 16, fontFamily: fonts.secondary[600]}}>
+                  {jumlah2} X
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  if (jumlah2 > 100) {
+                    showMessage({
+                      type: 'danger',
+                      message: 'Masukan Maksimal 100x',
+                    });
+                  } else {
+                    setJumlah2(jumlah2 + 1);
+                    setKirim({
+                      ...kirim,
+                      pupuk: jumlah2 + 1,
+                    });
+                  }
+                }}
+                style={{
+                  backgroundColor: colors.black,
+                  width: '40%',
+                  borderRadius: 10,
+                  marginLeft: 10,
+                  height: 40,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Icon type="ionicon" name="add" color={colors.white} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          {/* pupuk */}
+        </View>
+      </ScrollView>
+
       <View>
         <MyButton
           fontWeight="bold"
           radius={0}
-          title="PROSES PESANAN"
-          warna={colors.primary}
+          title="SIMPAN PENGATURAN"
+          warna={colors.tertiary}
           onPress={addToCart}
         />
       </View>
