@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, ImageBackground} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   Avatar,
   Accessory,
@@ -8,10 +7,12 @@ import {
   ListItem,
   // Icon,
   Button,
+  Icon,
 } from 'react-native-elements';
 import {storeData, getData} from '../../utils/localStorage';
 import {colors} from '../../utils/colors';
-import {fonts} from '../../utils/fonts';
+import {fonts, windowWidth} from '../../utils/fonts';
+import {MyInput, MyGap, MyButton} from '../../components';
 
 export default function Account({navigation}) {
   const [user, setUser] = useState({});
@@ -41,42 +42,25 @@ export default function Account({navigation}) {
       <View
         style={{
           padding: 10,
-          // backgroundColor: 'blue',
-
+          // backgroundColor: 'green',
           flex: 1,
-          flexDirection: 'column',
         }}>
         <View
           style={{
+            marginVertical: 5,
             padding: 10,
-            // backgroundColor: 'yellow',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 1,
+            borderRadius: 10,
+            backgroundColor: colors.white,
           }}>
-          <View
-            style={{
-              // borderWidth: 1,
-              backgroundColor: colors.primary,
-              width: 100,
-              height: 100,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 50,
-            }}>
-            <Text
-              style={{
-                fontSize: 50,
-                color: 'white',
-              }}>
-              {iLogo}
-            </Text>
-          </View>
           <Text
             style={{
-              fontSize: 25,
               fontFamily: fonts.secondary[600],
-              top: 10,
+            }}>
+            Nama Lengkap
+          </Text>
+          <Text
+            style={{
+              fontFamily: fonts.secondary[400],
               color: colors.black,
             }}>
             {user.nama_lengkap}
@@ -84,93 +68,132 @@ export default function Account({navigation}) {
         </View>
         <View
           style={{
+            marginVertical: 5,
             padding: 10,
-            // backgroundColor: 'green',
-            flex: 1,
+            backgroundColor: colors.white,
+            borderRadius: 10,
           }}>
-          <View
+          <Text
             style={{
-              marginVertical: 5,
-              padding: 10,
-              backgroundColor: colors.white,
-              borderRadius: 10,
+              fontFamily: fonts.secondary[600],
             }}>
+            Nomor Induk
+          </Text>
+          <Text
+            style={{
+              fontFamily: fonts.secondary[400],
+            }}>
+            {user.nis}
+          </Text>
+        </View>
+        <View
+          style={{
+            marginVertical: 5,
+            padding: 10,
+            borderRadius: 10,
+            backgroundColor: colors.white,
+          }}>
+          <Text
+            style={{
+              fontFamily: fonts.secondary[600],
+            }}>
+            Kelas
+          </Text>
+          <Text
+            style={{
+              fontFamily: fonts.secondary[400],
+            }}>
+            {user.kelas}
+          </Text>
+        </View>
+        <View
+          style={{
+            marginVertical: 5,
+            padding: 10,
+            borderRadius: 10,
+            backgroundColor: colors.white,
+          }}>
+          <Text
+            style={{
+              fontFamily: fonts.secondary[600],
+            }}>
+            Sekolah
+          </Text>
+          <Text
+            style={{
+              fontFamily: fonts.secondary[400],
+            }}>
+            {user.sekolah}
+          </Text>
+        </View>
+        <MyGap jarak={20} />
+        <MyButton
+          title="SIGN OUT"
+          warna={colors.primary}
+          Icons="log-out-outline"
+        />
+        <MyGap jarak={20} />
+        <View style={{backgroundColor: colors.white, padding: 10}}>
+          <View style={{flexDirection: 'row', marginVertical: 5}}>
+            <Icon type="ionicon" name="bulb-outline" />
             <Text
               style={{
+                left: 10,
                 fontFamily: fonts.secondary[600],
+                fontSize: windowWidth / 20,
+                color: colors.black,
               }}>
-              Nomor Induk
-            </Text>
-            <Text
-              style={{
-                fontFamily: fonts.secondary[400],
-              }}>
-              {user.nis}
+              Kartika Yuni Purwanti
             </Text>
           </View>
-          <View
-            style={{
-              marginVertical: 5,
-              padding: 10,
-              borderRadius: 10,
-              backgroundColor: colors.white,
-            }}>
+          <View style={{flexDirection: 'row', marginVertical: 5}}>
+            <Icon type="ionicon" name="bulb-outline" />
             <Text
               style={{
+                left: 10,
                 fontFamily: fonts.secondary[600],
+                fontSize: windowWidth / 20,
+                color: colors.black,
               }}>
-              Kelas
-            </Text>
-            <Text
-              style={{
-                fontFamily: fonts.secondary[400],
-              }}>
-              {user.kelas}
+              Swamanda Ika Novichasari
             </Text>
           </View>
-          <View
-            style={{
-              marginVertical: 5,
-              padding: 10,
-              borderRadius: 10,
-              backgroundColor: colors.white,
-            }}>
+          <View style={{flexDirection: 'row', marginVertical: 5}}>
+            <Icon type="ionicon" name="bulb-outline" />
             <Text
               style={{
+                left: 10,
                 fontFamily: fonts.secondary[600],
+                fontSize: windowWidth / 20,
+                color: colors.black,
               }}>
-              Sekolah
-            </Text>
-            <Text
-              style={{
-                fontFamily: fonts.secondary[400],
-              }}>
-              {user.sekolah}
+              Zulmi Roestika Rini
             </Text>
           </View>
-          <Button
-            onPress={handleSave}
-            title="Sign Out"
-            icon={
-              <Icon
-                style={{
-                  marginRight: 5,
-                }}
-                name="sign-out"
-                size={15}
-                color="white"
-              />
-            }
-            buttonStyle={{
-              backgroundColor: colors.tertiary,
-              height: 45,
-              marginTop: '5%',
-              borderRadius: 10,
-              marginBottom: 20,
-              padding: 20,
-              margin: 5,
-            }}
-          />
+          <View style={{flexDirection: 'row', marginVertical: 5}}>
+            <Icon type="ionicon" name="bulb-outline" />
+            <Text
+              style={{
+                left: 10,
+                fontFamily: fonts.secondary[600],
+                fontSize: windowWidth / 20,
+                color: colors.black,
+              }}>
+              Maya Mustafidah
+            </Text>
+          </View>
+          <View style={{flexDirection: 'row', marginVertical: 5}}>
+            <Icon type="ionicon" name="bulb-outline" />
+            <Text
+              style={{
+                left: 10,
+                fontFamily: fonts.secondary[600],
+                fontSize: windowWidth / 20,
+                color: colors.black,
+              }}>
+              Yana Tri Anisyah Wardani
+            </Text>
+          </View>
         </View>
       </View>
     </ImageBackground>
