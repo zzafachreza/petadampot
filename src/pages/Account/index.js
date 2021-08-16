@@ -128,6 +128,7 @@ export default function Account({navigation}) {
         </View>
         <MyGap jarak={20} />
         <MyButton
+          onPress={handleSave}
           title="SIGN OUT"
           warna={colors.primary}
           Icons="log-out-outline"

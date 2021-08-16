@@ -88,7 +88,7 @@ export default function Splash({navigation}) {
         console.log('sudah login logon');
 
         setTimeout(() => {
-          // navigation.replace('MainApp');
+          navigation.replace('MainApp');
         }, 1500);
       }
     });
