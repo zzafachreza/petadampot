@@ -93,7 +93,7 @@ export default function MyTerbaik() {
                 color: colors.white,
                 textAlign: 'center',
               }}>
-              Siram {item.siram}x
+              Siram {item.siram}x Sehari
             </Text>
           </View>
           <View
@@ -113,7 +113,7 @@ export default function MyTerbaik() {
                 color: colors.white,
                 textAlign: 'center',
               }}>
-              Pupuk {item.pupuk}x
+              Pupuk 2 minggu {item.pupuk}x
             </Text>
           </View>
         </View>

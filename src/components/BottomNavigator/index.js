@@ -57,7 +57,7 @@ export default function BottomNavigator({state, descriptors, navigation}) {
         } else if (label === 'Account') {
           iconName = 'person-outline';
         } else if (label === 'Transaksi') {
-          iconName = 'list-outline';
+          iconName = 'shield-checkmark-outline';
         } else if (label === 'Chat') {
           iconName = 'chatbubbles-outline';
         } else if (label === 'Cart') {
@@ -138,7 +138,7 @@ export default function BottomNavigator({state, descriptors, navigation}) {
                         ? colors.primary
                         : '#919095',
                   }}>
-                  {label}
+                  {label == 'Transaksi' ? 'Ceklis' : label}
                 </Text>
               </View>
             </View>

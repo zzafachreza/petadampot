@@ -212,7 +212,7 @@ export default function Barang({navigation, route}) {
                   color: colors.black,
                   left: 10,
                 }}>
-                Pupuk Sehari Berapa Kali
+                Pupuk 2 Minggu Berapa kali
               </Text>
             </View>
 
