@@ -156,7 +156,7 @@ export default function Account({navigation}) {
                 fontSize: windowWidth / 20,
                 color: colors.black,
               }}>
-              Swamanda Ika Novichasari
+              Suamanda Ika Novichasari
             </Text>
           </View>
           <View style={{flexDirection: 'row', marginVertical: 5}}>
